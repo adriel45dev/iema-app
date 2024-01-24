@@ -15,6 +15,9 @@ import { GRADE_SCHEDULE_HEADDING } from "@/app/constants";
 
 import {
   AddCircleIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  BackIcon,
   EraseIcon,
   EyeIcon,
   PrintIcon,
@@ -56,7 +59,7 @@ const TableDataGrade = ({
     .map((p) => p.name);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col items-center justify-center">
       <span>{disciplina?.name || ""}</span>
       {professores && (
         <span className="text-xs">
@@ -108,6 +111,10 @@ const TableView = ({
   const [grade, setGrade] = useState<GradeType[][]>([]);
   const [alertAction, setAlertAction] =
     useState<AlertTypeData>(AlertDefaultData);
+
+  const [indexWeek, setIndexWeek] = useState(0);
+
+  const weekendTitle = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
 
   /** GET DATA FROM LOCAL_STORAGE */
   useEffect(() => {
@@ -270,7 +277,6 @@ const TableView = ({
   };
 
   /** COMPONENTS */
-
   const TableData = ({ children, ci, ri }: TableDataProps) => {
     const gradeTarget = grade[ci][ri];
 
@@ -304,20 +310,97 @@ const TableView = ({
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex min-w-full flex-col items-center justify-center">
       <Alert setAlertAction={setAlertAction} alertAction={alertAction}></Alert>
-      <table className="min-w-full table-auto border-collapse border border-black text-sm">
-        <TableHeader />
 
-        <tbody className="text-center">
-          {grade.length > 0 &&
-            grade[0][0] &&
-            Array.from({ length: 9 }, (_, ri) => {
-              return (
-                <React.Fragment key={ri}>
-                  {[2, 5, 7].includes(ri) && <TableRowBreak />}
+      <div className="hidden w-full sm:flex">
+        <table className="min-w-full table-auto border-collapse border border-black text-sm">
+          <TableHeader />
 
-                  <tr className="w-full">
+          <tbody className="text-center">
+            {grade.length > 0 &&
+              grade[0][0] &&
+              Array.from({ length: 9 }, (_, ri) => {
+                return (
+                  <React.Fragment key={ri}>
+                    {[2, 5, 7].includes(ri) && <TableRowBreak />}
+
+                    <tr className="w-full">
+                      <TableHeadding>
+                        <div className="flex w-full flex-col items-center justify-center">
+                          <span className="font-bold">{`${ri + 1}º`}</span>
+                          <span className="w-max text-xs">
+                            {GRADE_SCHEDULE_HEADDING[ri]}
+                          </span>
+                        </div>
+                      </TableHeadding>
+
+                      {Array.from({ length: 5 }, (_, ci) => {
+                        const data = grade[ci][ri]?.[turma.id];
+                        const { disciplina, professores } = data || {
+                          disciplina: null,
+                          professores: null,
+                        };
+                        return (
+                          <React.Fragment key={ci}>
+                            <TableData key={ci} ci={ci} ri={ri}>
+                              <TableDataGrade
+                                disciplina={disciplina}
+                                professores={professores}
+                              />
+                            </TableData>
+                          </React.Fragment>
+                        );
+                      })}
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex w-full flex-col sm:hidden">
+        <div className="flex w-full items-center justify-between gap-2 py-2 text-slate-700 ">
+          <button
+            className="hover:text-blue-500"
+            onClick={() =>
+              setIndexWeek((prev) => (prev - 1 >= 0 ? prev - 1 : 4))
+            }
+          >
+            <ArrowLeftIcon className="h-10 w-10" />
+          </button>
+          <button
+            className="hover:text-blue-500"
+            onClick={() => setIndexWeek((prev) => (prev + 1) % 5)}
+          >
+            <ArrowRightIcon className="h-10 w-10" />
+          </button>
+        </div>
+
+        <table className="min-w-full table-auto border-collapse border border-black text-sm">
+          <thead>
+            <tr className="w-max  text-center">
+              <TableHeadding>
+                <span className="w-max font-bold">Horário</span>
+              </TableHeadding>
+              <TableHeadding>
+                <span className="font-bold">{weekendTitle[indexWeek]}</span>
+              </TableHeadding>
+            </tr>
+          </thead>
+
+          <tbody>
+            {grade.length > 0 &&
+              grade[0][0] &&
+              Array.from({ length: 9 }, (_, ri) => {
+                const data = grade[indexWeek][ri]?.[turma.id];
+                const { disciplina, professores } = data || {
+                  disciplina: null,
+                  professores: null,
+                };
+                return (
+                  <tr>
                     <TableHeadding>
                       <div className="flex w-full flex-col items-center justify-center">
                         <span className="font-bold">{`${ri + 1}º`}</span>
@@ -327,29 +410,18 @@ const TableView = ({
                       </div>
                     </TableHeadding>
 
-                    {Array.from({ length: 5 }, (_, ci) => {
-                      const data = grade[ci][ri]?.[turma.id];
-                      const { disciplina, professores } = data || {
-                        disciplina: null,
-                        professores: null,
-                      };
-                      return (
-                        <React.Fragment key={ci}>
-                          <TableData key={ci} ci={ci} ri={ri}>
-                            <TableDataGrade
-                              disciplina={disciplina}
-                              professores={professores}
-                            />
-                          </TableData>
-                        </React.Fragment>
-                      );
-                    })}
+                    <TableData ci={indexWeek} ri={ri}>
+                      <TableDataGrade
+                        disciplina={disciplina}
+                        professores={professores}
+                      />
+                    </TableData>
                   </tr>
-                </React.Fragment>
-              );
-            })}
-        </tbody>
-      </table>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
 
       {/* ACTIONS */}
       <div className="flex flex-col gap-2 p-6">

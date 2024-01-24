@@ -33,8 +33,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-w-screen flex min-h-screen flex-col items-center justify-center bg-gray-100 p-24">
-      <div className=" grid w-full grid-cols-1 gap-2 sm:grid-cols-4">
+    <main className="min-w-screen flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4 sm:justify-center sm:p-24">
+      <div className="grid w-full grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-4">
         <Link href={"/grade"}>
           <MenuOptions title="Horário">
             <ClipboardIcon className="h-16 w-16" />

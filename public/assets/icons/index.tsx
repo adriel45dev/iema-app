@@ -19,6 +19,8 @@ import UploadIcon from "./UploadIcon";
 import PrintIcon from "./PrintIcon";
 import BackIcon from "./BackIcon";
 import CheckIcon from "./CheckIcon";
+import ArrowRightIcon from "./ArrrowRightIcon";
+import ArrowLeftIcon from "./ArrowLeftIcon";
 
 export {
   ClipboardIcon,
@@ -42,4 +44,6 @@ export {
   PrintIcon,
   BackIcon,
   CheckIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
 };

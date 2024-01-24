@@ -46,9 +46,15 @@ export default function Grade() {
   return (
     <div className="flex min-h-screen min-w-full flex-col items-center bg-white p-4 pb-8">
       <div>
-        <h1 className="flex items-center justify-center gap-2 text-center text-2xl font-bold uppercase">
-          Horário | <span>{TURMAS.find((c) => c.id == turma.id)?.title}</span>
-          <span className="rounded-2xl border border-slate-600 px-4 py-2 text-xs font-bold text-blue-500">
+        <h1 className="flex w-full flex-col flex-wrap items-center justify-center gap-2 text-center text-2xl font-bold uppercase sm:flex-row">
+          <div className="text-sm sm:text-2xl">
+            <span>Horário</span>{" "}
+            <span className="hidden sm:inline-block">|</span>{" "}
+          </div>
+          <span className="text-sm sm:text-2xl">
+            {TURMAS.find((c) => c.id == turma.id)?.title}
+          </span>
+          <span className="rounded-2xl border border-slate-600 px-4 py-1 text-xs font-bold text-blue-500">
             {turma.id}
           </span>
         </h1>
