@@ -283,6 +283,7 @@ const TableView = ({
   /** COMPONENTS */
   const TableData = ({ children, ci, ri }: TableDataProps) => {
     const gradeTarget = grade[ci][ri];
+    const ATRIBUICAO = gradeTarget?.[professor.id]?.disciplina?.id;
 
     const idsProfessoresAll = Object.keys(gradeTarget)
       .map((key) => gradeTarget?.[key].professores.map((p) => p.id))
@@ -296,10 +297,16 @@ const TableView = ({
       <td
         onClick={() => handleClickTable(ci, ri)}
         className={`text-black-700 group cursor-pointer border-b border-r border-black px-2 py-1  hover:text-opacity-50 ${
-          idsProfessoresTurma?.includes(INSTITUCIONAL_ID) && "bg-orange-300"
-        } ${idsProfessoresAll?.includes(professor.id) && "bg-gray-400"} ${
-          gradeTarget?.[turma.id]?.disciplina?.id == "eo4" && "bg-purple-400"
-        }`}
+          idsProfessoresTurma?.includes(INSTITUCIONAL_ID) ? "bg-orange-300" : ""
+        } ${ATRIBUICAO == "tpm" ? "bg-blue-400" : ""} ${
+          idsProfessoresAll?.includes(professor.id) && ATRIBUICAO != "tpm"
+            ? "bg-gray-400"
+            : ""
+        } ${
+          gradeTarget?.[turma.id]?.disciplina?.id == "eo4"
+            ? "bg-purple-400"
+            : ""
+        } `}
       >
         <div className="relative flex items-center justify-center">
           {children}

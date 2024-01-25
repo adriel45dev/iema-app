@@ -121,6 +121,29 @@ export default function Grade() {
         addToAll={addToAll}
         classes={TURMAS}
       />
+
+      <div className="flex w-full flex-col gap-2 p-4">
+        <span className="mb-2 font-bold uppercase">Descrição:</span>
+
+        <div className="flex w-max items-center justify-center gap-2 text-xs">
+          <div className="h-4 w-4 rounded-sm border border-orange-600 bg-orange-500"></div>
+          <span>INSTITUCIONAL</span>
+        </div>
+        <div className="flex w-max items-center justify-center gap-2 text-xs">
+          <div className="h-4 w-4 rounded-sm border border-blue-600 bg-blue-400"></div>
+          <span>T.P.M</span>
+        </div>
+
+        <div className="flex w-max items-center justify-center gap-2 text-xs">
+          <div className="h-4 w-4 rounded-sm border border-gray-600 bg-gray-400"></div>
+          <span>HORÁRIO ALOCADO</span>
+        </div>
+
+        <div className="flex w-max items-center justify-center gap-2 text-xs">
+          <div className="h-4 w-4 rounded-sm border border-purple-600 bg-purple-400"></div>
+          <span>ESTUDO ORIENTADO</span>
+        </div>
+      </div>
     </div>
   );
 }
