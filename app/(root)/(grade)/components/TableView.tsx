@@ -1,13 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import { AlertDefaultData, AlertType } from "./Alert";
 import { AlertTypeData } from "./Alert";
 import Alert from "./Alert";
 import Link from "next/link";
 import ExcelExportButton from "./ExcelExportButton";
 import Button, { ButtonType } from "./Button";
-import { GET_GRADE, INSTITUCIONAL_ID, SET_GRADE } from "@/app/constants";
+import {
+  GET_GRADE,
+  INSTITUCIONAL_ID,
+  SET_GRADE,
+  GRADE_WEEK_HEADDING,
+} from "@/app/constants";
 
 import { DisciplinaType, GradeType, ProfessorType } from "@/app/shared/type";
 
@@ -114,7 +118,7 @@ const TableView = ({
 
   const [indexWeek, setIndexWeek] = useState(0);
 
-  const weekendTitle = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+  // const GRADE_WEEK_HEADDING = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
 
   /** GET DATA FROM LOCAL_STORAGE */
   useEffect(() => {
@@ -361,23 +365,6 @@ const TableView = ({
       </div>
 
       <div className="flex w-full flex-col sm:hidden">
-        <div className="flex w-full items-center justify-between gap-2 py-2 text-slate-700 ">
-          <button
-            className="hover:text-blue-500"
-            onClick={() =>
-              setIndexWeek((prev) => (prev - 1 >= 0 ? prev - 1 : 4))
-            }
-          >
-            <ArrowLeftIcon className="h-10 w-10" />
-          </button>
-          <button
-            className="hover:text-blue-500"
-            onClick={() => setIndexWeek((prev) => (prev + 1) % 5)}
-          >
-            <ArrowRightIcon className="h-10 w-10" />
-          </button>
-        </div>
-
         <table className="min-w-full table-auto border-collapse border border-black text-sm">
           <thead>
             <tr className="w-max  text-center">
@@ -385,7 +372,9 @@ const TableView = ({
                 <span className="w-max font-bold">Horário</span>
               </TableHeadding>
               <TableHeadding>
-                <span className="font-bold">{weekendTitle[indexWeek]}</span>
+                <span className="font-bold">
+                  {GRADE_WEEK_HEADDING[indexWeek]}
+                </span>
               </TableHeadding>
             </tr>
           </thead>
@@ -421,6 +410,27 @@ const TableView = ({
               })}
           </tbody>
         </table>
+
+        <div className="flex w-full items-center justify-between gap-2 py-2 text-slate-700 ">
+          <button
+            className="hover:text-blue-500"
+            onClick={() =>
+              setIndexWeek((prev) => (prev - 1 >= 0 ? prev - 1 : 4))
+            }
+          >
+            <ArrowLeftIcon className="h-10 w-10" />
+          </button>
+
+          <span className="font-bold uppercase text-blue-500">
+            {GRADE_WEEK_HEADDING[indexWeek]}
+          </span>
+          <button
+            className="hover:text-blue-500"
+            onClick={() => setIndexWeek((prev) => (prev + 1) % 5)}
+          >
+            <ArrowRightIcon className="h-10 w-10" />
+          </button>
+        </div>
       </div>
 
       {/* ACTIONS */}

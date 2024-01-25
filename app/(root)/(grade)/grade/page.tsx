@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "../components/Select";
 import TableView from "../components/TableView";
-import { TURMAS } from "@/app/constants";
+import { DATA_DEF, DATA_DISCIPLINAS, TURMAS } from "@/app/constants";
 import { ProfessorType, DisciplinasType } from "@/app/shared/type";
 
 export default function Grade() {
@@ -16,7 +16,7 @@ export default function Grade() {
   const [disciplinas, setDisciplinas] = useState<DisciplinasType[]>([]);
 
   useEffect(() => {
-    const dataJSON = localStorage.getItem("data_professores");
+    const dataJSON = localStorage.getItem(DATA_DEF.dataProfessores);
 
     if (dataJSON) {
       try {
@@ -30,7 +30,7 @@ export default function Grade() {
   }, []);
 
   useEffect(() => {
-    const dataJSON = localStorage.getItem("data_disciplinas");
+    const dataJSON = localStorage.getItem(DATA_DEF.dataDisciplinas);
 
     if (dataJSON) {
       try {

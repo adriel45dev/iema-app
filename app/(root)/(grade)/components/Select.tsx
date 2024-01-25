@@ -58,23 +58,40 @@ export default function Select({
         </option>
       )}
 
-      {professorSelected && filterDisciplinas.length && (
-        <optgroup label={"///////////////"}>
-          {filterDisciplinas.map((d) => (
+      {professorSelected && filterDisciplinas.length ? (
+        <>
+          <optgroup label={"****"} title="t">
+            {filterDisciplinas.map((d) => (
+              <option value={d.id} key={d.id}>
+                {d.name}
+              </option>
+            ))}
+          </optgroup>
+
+          <optgroup label={"****"} title="t">
+            {data
+              .filter(
+                (d) =>
+                  !d.professores
+                    ?.map((p) => p.id)
+                    .includes(professorSelected.id),
+              )
+              .map((d, i) => (
+                <option value={d.id} key={d.id}>
+                  {d.name}
+                </option>
+              ))}
+          </optgroup>
+        </>
+      ) : (
+        <optgroup label={"****"}>
+          {data.map((d, i) => (
             <option value={d.id} key={d.id}>
               {d.name}
             </option>
           ))}
         </optgroup>
       )}
-
-      <optgroup label={"///////////////"}>
-        {data.map((d, i) => (
-          <option value={d.id} key={d.id}>
-            {d.name}
-          </option>
-        ))}
-      </optgroup>
     </select>
   );
 }

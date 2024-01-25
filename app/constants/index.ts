@@ -48,6 +48,8 @@ const GRADE_SCHEDULE_HEADDING = [
   "16h10 - 17h00",
 ];
 
+const GRADE_WEEK_HEADDING = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"];
+
 const DATA_PROFESSOR = [{ id: "0", name: "INSTITUCIONAL" }];
 const DATA_DISCIPLINAS = [
   { id: "i0", name: "TUTORIA", professores: DATA_PROFESSOR },
@@ -62,6 +64,7 @@ export {
   INSTITUCIONAL_ID,
   DATA_DEF,
   GRADE_SCHEDULE_HEADDING,
+  GRADE_WEEK_HEADDING,
   GET_GRADE,
   SET_GRADE,
   DATA_PROFESSOR,
