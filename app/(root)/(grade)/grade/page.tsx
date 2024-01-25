@@ -143,6 +143,11 @@ export default function Grade() {
           <div className="h-4 w-4 rounded-sm border border-purple-600 bg-purple-400"></div>
           <span>ESTUDO ORIENTADO</span>
         </div>
+
+        <div className="flex w-max items-center justify-center gap-2 text-xs">
+          <div className="h-4 w-4 rounded-sm border border-yellow-600 bg-yellow-400"></div>
+          <span>ATRIBUIÇÕES</span>
+        </div>
       </div>
     </div>
   );

@@ -299,7 +299,11 @@ const TableView = ({
         className={`text-black-700 group cursor-pointer border-b border-r border-black px-2 py-1  hover:text-opacity-50 ${
           idsProfessoresTurma?.includes(INSTITUCIONAL_ID) ? "bg-orange-300" : ""
         } ${ATRIBUICAO == "tpm" ? "bg-blue-400" : ""} ${
-          idsProfessoresAll?.includes(professor.id) && ATRIBUICAO != "tpm"
+          ATRIBUICAO?.includes("att") ? "bg-yellow-400" : ""
+        } ${
+          idsProfessoresAll?.includes(professor.id) &&
+          ATRIBUICAO != "tpm" &&
+          !ATRIBUICAO?.includes("att")
             ? "bg-gray-400"
             : ""
         } ${
@@ -396,7 +400,7 @@ const TableView = ({
                   professores: null,
                 };
                 return (
-                  <tr>
+                  <tr key={ri}>
                     <TableHeadding>
                       <div className="flex w-full flex-col items-center justify-center">
                         <span className="font-bold">{`${ri + 1}º`}</span>

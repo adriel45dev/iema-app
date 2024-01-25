@@ -5,7 +5,12 @@ import {
   GRADE_WEEK_HEADDING,
   SET_GRADE,
 } from "@/app/constants";
-import { DisciplinaType, DisciplinasType, GradeType } from "@/app/shared/type";
+import {
+  DisciplinaType,
+  DisciplinasType,
+  GradeType,
+  ProfessorType,
+} from "@/app/shared/type";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/public/assets/icons";
 import React, { useEffect, useState } from "react";
 
@@ -40,17 +45,32 @@ const TableDataDefault = ({ children }: { children?: React.ReactNode }) => {
   );
 };
 
+const TableRowBreak = () => {
+  return (
+    <tr className="w-full">
+      <td
+        colSpan={12}
+        className="border border-black bg-blue-300 text-center text-xs font-medium"
+      >
+        INTERVALO
+      </td>
+    </tr>
+  );
+};
+
 type TableIndividualProps = {
   // selectedProfessor.id: string;
   atribuicao: { name: string; id: string };
   selectedProfessor: { name: string; id: string };
   remover: boolean;
+  professores: ProfessorType[];
 };
 
 export default function TableIndividual({
   selectedProfessor,
   atribuicao,
   remover,
+  professores,
 }: TableIndividualProps) {
   const [grade, setGrade] = useState<GradeType[][]>([]);
   const [indexTable, setIndexTable] = useState(0);
@@ -112,6 +132,23 @@ export default function TableIndividual({
     FN_ADD_DATA();
   };
 
+  const handleRemoverAtribuicoes = () => {
+    if (
+      !confirm(
+        "Esta ação resultará na exclusão de todas as atribuições do professor selecionado.",
+      )
+    )
+      return;
+    const newData = [...grade];
+    newData.forEach((col) =>
+      col.forEach((row) => {
+        delete row[selectedProfessor.id];
+      }),
+    );
+
+    setGrade(newData);
+  };
+
   const TableData = ({
     children,
     ci,
@@ -170,6 +207,7 @@ export default function TableIndividual({
               Array.from({ length: 9 }, (_, ri) => {
                 return (
                   <React.Fragment key={ri}>
+                    {[2, 5, 7].includes(ri) && <TableRowBreak />}
                     <tr>
                       <TableHeadding>
                         <div className="flex flex-col text-xs">
@@ -196,7 +234,10 @@ export default function TableIndividual({
                               <>
                                 <TableDataDefault>
                                   {professor.length > 1 ||
-                                  professor[0]?.disciplina.id == "tpm" ? (
+                                  professor[0]?.disciplina.id == "tpm" ||
+                                  professor[0]?.disciplina.id.includes(
+                                    "att",
+                                  ) ? (
                                     <span className="font-bold text-orange-600">
                                       *
                                     </span>
@@ -312,6 +353,17 @@ export default function TableIndividual({
             onClick={() => setIndexTable((prev) => (prev + 1) % 5)}
           >
             <ArrowRightIcon className="h-10 w-10" />
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-4 flex w-full items-center justify-center gap-2">
+        <div className="flex justify-center">
+          <button
+            onClick={() => handleRemoverAtribuicoes()}
+            className="rounded-2xl border  border-slate-900 px-4 text-sm hover:scale-105 hover:text-gray-600"
+          >
+            Remover atribuições do professor
           </button>
         </div>
       </div>

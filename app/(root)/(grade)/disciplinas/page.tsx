@@ -298,15 +298,18 @@ export default function Disciplinas() {
               <div className="text-sm font-bold">Ações</div>
             </li>
 
-            {disciplinas.map((d) => (
+            {disciplinas.map((d, i) => (
               <li
-                key={d.id}
+                key={i}
                 className="flex justify-between rounded-2xl px-4 py-2 odd:bg-gray-300 even:bg-gray-400 hover:bg-indigo-400"
               >
                 <div className="w-full">{d.name}</div>
                 <div className="flex w-full items-center justify-start gap-2 ">
-                  {d.professores?.map((p) => (
-                    <span className="rounded-2xl bg-cyan-800 px-2 py-1 text-xs text-white">
+                  {d.professores?.map((p, i) => (
+                    <span
+                      key={i}
+                      className="rounded-2xl bg-cyan-800 px-2 py-1 text-xs text-white"
+                    >
                       {p.name}
                     </span>
                   ))}

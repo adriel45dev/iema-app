@@ -5,7 +5,12 @@ import Select from "../components/Select";
 import { ProfessorType } from "@/app/shared/type";
 import { DATA_DEF } from "@/app/constants";
 
-const DATA_ATRIBUICAOES = [{ name: "T.P.M", id: "tpm" }];
+const DATA_ATRIBUICAOES = [
+  { name: "T.P.M", id: "tpm" },
+  { name: "AVALIAÇÃO", id: "att1" },
+  { name: "TUTORIA", id: "att2" },
+  { name: "ELETIVA", id: "att3" },
+];
 
 export default function Individual() {
   const [professores, setProfessores] = useState<ProfessorType[]>([]);
@@ -69,6 +74,7 @@ export default function Individual() {
         selectedProfessor={professor}
         atribuicao={atribuicao}
         remover={remover}
+        professores={professores}
       />
     </div>
   );
