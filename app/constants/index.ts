@@ -59,6 +59,14 @@ const DATA_DISCIPLINAS = [
   { id: "eo4", name: "EST. ORIENTADO", professores: [] },
 ];
 
+const GET_DATE_STR = () => {
+  const date = new Date();
+  const dateStr = `${date.getDate()}-${
+    date.getMonth() + 1
+  }-${date.getFullYear()}--${date.getHours()}${date.getMinutes()}${date.getSeconds()}`;
+  return dateStr;
+};
+
 export {
   TURMAS,
   INSTITUCIONAL_ID,
@@ -69,4 +77,5 @@ export {
   SET_GRADE,
   DATA_PROFESSOR,
   DATA_DISCIPLINAS,
+  GET_DATE_STR,
 };

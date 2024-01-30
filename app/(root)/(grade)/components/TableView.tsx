@@ -27,6 +27,7 @@ import {
   PrintIcon,
   TrashIcon,
 } from "@/public/assets/icons";
+import ExelExportAllButton from "./ExelExportAllButton";
 
 type TableDataProps = {
   children: React.ReactNode;
@@ -467,7 +468,8 @@ const TableView = ({
             </Button>
           </Link>
 
-          <ExcelExportButton turma={turma.id} grade={grade} />
+          {/* <ExcelExportButton turma={turma.id} grade={grade} /> */}
+          <ExelExportAllButton grade={grade} />
         </div>
 
         <div className="flex justify-center">
