@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button, { ButtonType } from "./Button";
 import { ExelLogoIcon } from "@/public/assets/icons";
 import * as XLSX from "xlsx";
@@ -19,7 +19,6 @@ const criarPlanilha = (gradeEscolar: GradeType[][]) => {
   turmas.forEach((turmaKey) => {
     const worksheetData = [];
 
-    // Adicionar cabeçalhos
     worksheetData.push(["", ...diasDaSemana]);
 
     for (let turno = 0; turno < 9; turno++) {
@@ -38,7 +37,6 @@ const criarPlanilha = (gradeEscolar: GradeType[][]) => {
     XLSX.utils.book_append_sheet(workbook, worksheet, `Turma ${turmaKey}`);
   });
 
-  // Escreve o arquivo (pode ser substituído por qualquer método de salvamento)
   XLSX.writeFile(workbook, `horario_iema_${GET_DATE_STR()}.xlsx`);
 };
 

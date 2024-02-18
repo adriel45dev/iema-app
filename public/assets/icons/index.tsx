@@ -21,7 +21,7 @@ import BackIcon from "./BackIcon";
 import CheckIcon from "./CheckIcon";
 import ArrowRightIcon from "./ArrrowRightIcon";
 import ArrowLeftIcon from "./ArrowLeftIcon";
-
+import HistoryIcon from "./HistoryIcon";
 export {
   ClipboardIcon,
   UsersIcon,
@@ -46,4 +46,5 @@ export {
   CheckIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  HistoryIcon,
 };

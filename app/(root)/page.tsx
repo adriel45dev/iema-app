@@ -8,6 +8,7 @@ import {
   CourseIcon,
   TeacherIcon,
   BackupIcon,
+  HistoryIcon,
 } from "@/public/assets/icons";
 import { useEffect } from "react";
 import { DATA_DEF, DATA_PROFESSOR, DATA_DISCIPLINAS } from "../constants";
@@ -62,6 +63,12 @@ export default function Home() {
         <Link href={"/backup"}>
           <MenuOptions title="Backup">
             <BackupIcon className="h-16 w-16" />
+          </MenuOptions>
+        </Link>
+
+        <Link href={"/sincronizar"}>
+          <MenuOptions title="Sincronizar">
+            <HistoryIcon className="h-16 w-16" />
           </MenuOptions>
         </Link>
       </div>
